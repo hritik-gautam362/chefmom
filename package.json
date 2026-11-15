@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "prebuild": "node scripts/prepare-db.js",
+    "build": "node scripts/prepare-db.js && next build",
+    "postinstall": "node scripts/prepare-db.js",
     "start": "next start",
     "lint": "next lint",
     "test": "node scripts/test_engine.js"

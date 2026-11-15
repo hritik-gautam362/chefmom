@@ -1,37 +1,105 @@
 import Database from "better-sqlite3";
 import path from "path";
 import fs from "fs";
+import zlib from "zlib";
 import { Recipe, ParsedIngredient, InstructionStep, IngredientLibraryItem } from "./types";
 import { getEditorialFoodImage } from "./curatedPhotos";
 
 let dbInstance: Database.Database | null = null;
+
+function isFileValidSqlite(filePath: string): boolean {
+  if (!fs.existsSync(filePath)) return false;
+  try {
+    const stat = fs.statSync(filePath);
+    if (stat.size < 1000000) return false; // LFS pointers are ~130 bytes
+    const fd = fs.openSync(filePath, "r");
+    const header = Buffer.alloc(16);
+    fs.readSync(fd, header, 0, 16, 0);
+    fs.closeSync(fd);
+    return header.toString("utf8", 0, 15) === "SQLite format 3";
+  } catch {
+    return false;
+  }
+}
 
 export function getDatabase(): Database.Database {
   if (dbInstance) {
     return dbInstance;
   }
 
-  let dbPath = path.join(process.cwd(), "data", "pantrymuse.db");
-  if (!fs.existsSync(dbPath)) {
-    // Fallback path resolution for serverless environments
-    const altPath = path.join(__dirname, "..", "..", "data", "pantrymuse.db");
-    if (fs.existsSync(altPath)) {
-      dbPath = altPath;
-    } else {
-      throw new Error(`Database file not found at ${dbPath}. Please verify database assets.`);
+  // Potential candidate paths for pantrymuse.db
+  const candidatePaths = [
+    path.join("/tmp", "pantrymuse.db"),
+    path.join(process.cwd(), "data", "pantrymuse.db"),
+    path.join(__dirname, "..", "..", "data", "pantrymuse.db"),
+    path.join(__dirname, "..", "data", "pantrymuse.db"),
+  ];
+
+  let resolvedDbPath: string | null = null;
+
+  for (const candidate of candidatePaths) {
+    if (isFileValidSqlite(candidate)) {
+      resolvedDbPath = candidate;
+      break;
     }
   }
 
-  dbInstance = new Database(dbPath, { readonly: true, fileMustExist: true });
+  // If no valid SQLite file found on disk (e.g. fresh Vercel serverless Lambda container),
+  // extract from data/pantrymuse.db.gz into /tmp/pantrymuse.db
+  if (!resolvedDbPath) {
+    const tmpPath = path.join("/tmp", "pantrymuse.db");
+
+    // Double-check if another concurrent request already wrote /tmp/pantrymuse.db
+    if (!isFileValidSqlite(tmpPath)) {
+      const gzCandidates = [
+        path.join(process.cwd(), "data", "pantrymuse.db.gz"),
+        path.join(__dirname, "..", "..", "data", "pantrymuse.db.gz"),
+        path.join(__dirname, "..", "data", "pantrymuse.db.gz"),
+      ];
+
+      let foundGz: string | null = null;
+      for (const gzCandidate of gzCandidates) {
+        if (fs.existsSync(gzCandidate)) {
+          foundGz = gzCandidate;
+          break;
+        }
+      }
+
+      if (foundGz) {
+        try {
+          const compressed = fs.readFileSync(foundGz);
+          const decompressed = zlib.gunzipSync(compressed);
+          const atomicTmp = path.join(
+            "/tmp",
+            `pantrymuse_${Date.now()}_${Math.random().toString(36).substring(2, 7)}.tmp`
+          );
+          fs.writeFileSync(atomicTmp, decompressed);
+          fs.renameSync(atomicTmp, tmpPath);
+        } catch (extractErr) {
+          console.error("Failed to extract pantrymuse.db.gz to /tmp:", extractErr);
+        }
+      }
+    }
+
+    if (isFileValidSqlite(tmpPath)) {
+      resolvedDbPath = tmpPath;
+    }
+  }
+
+  if (!resolvedDbPath) {
+    throw new Error(
+      `Recipe database could not be loaded. Please ensure data/pantrymuse.db or data/pantrymuse.db.gz is present.`
+    );
+  }
+
+  dbInstance = new Database(resolvedDbPath, { readonly: true, fileMustExist: true });
   try {
     dbInstance.pragma("query_only = ON");
   } catch {}
   try {
-    dbInstance.pragma("journal_mode = WAL");
-  } catch {}
-  try {
     dbInstance.pragma("cache_size = -32000"); // 32MB cache
   } catch {}
+
   return dbInstance;
 }
 

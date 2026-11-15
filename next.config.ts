@@ -5,9 +5,9 @@ const nextConfig: NextConfig = {
   outputFileTracingRoot: path.join(__dirname),
   serverExternalPackages: ["better-sqlite3"],
   outputFileTracingIncludes: {
-    "/*": ["./data/pantrymuse.db"],
-    "/api/**/*": ["./data/pantrymuse.db"],
-    "/recipe/**/*": ["./data/pantrymuse.db"],
+    "/*": ["./data/pantrymuse.db", "./data/pantrymuse.db.gz"],
+    "/api/**/*": ["./data/pantrymuse.db", "./data/pantrymuse.db.gz"],
+    "/recipe/**/*": ["./data/pantrymuse.db", "./data/pantrymuse.db.gz"],
   },
   images: {
     remotePatterns: [

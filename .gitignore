@@ -13,10 +13,12 @@
 __pycache__/
 *.py[cod]
 
-# SQLite temporary WAL/SHM files
+# SQLite temporary WAL/SHM files and generated database
 *.db-shm
 *.db-wal
 *.db-journal
+data/pantrymuse.db
+!data/pantrymuse.db.gz
 
 # Environment variables
 .env
