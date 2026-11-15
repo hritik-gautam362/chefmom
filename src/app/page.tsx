@@ -25,7 +25,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-6 sm:py-8 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-6xl xl:max-w-7xl px-4 py-6 sm:py-8 sm:px-6 lg:px-8">
       {/* Editorial Welcome Hero */}
       <section className="text-center pt-2 pb-6 sm:pt-6 sm:pb-10">
         <div className="inline-flex items-center gap-2 rounded-full border border-[#D5DED3] bg-[#FAFAF6]/90 px-3.5 py-1.5 shadow-xs mb-3">
@@ -43,7 +43,7 @@ export default function HomePage() {
           </span>
         </div>
 
-        <h1 className="font-heading text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#243B30] leading-tight">
+        <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-[#243B30] leading-tight">
           What are we cooking today?
         </h1>
 

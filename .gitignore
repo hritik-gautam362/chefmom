@@ -16,6 +16,7 @@ __pycache__/
 # SQLite temporary WAL/SHM files
 *.db-shm
 *.db-wal
+*.db-journal
 
 # Environment variables
 .env

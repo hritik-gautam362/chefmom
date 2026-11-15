@@ -63,7 +63,7 @@ export default function BrandLogo({
             <span
               className={`font-sans font-medium tracking-wide text-[#69766C] leading-tight mt-0.5 whitespace-nowrap ${dimensions.tag}`}
             >
-              Let the Magic Begin
+              Let the Magic Begin ✨
             </span>
           )}
         </div>

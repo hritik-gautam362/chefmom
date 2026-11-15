@@ -135,7 +135,7 @@ export default function RecipeDetailView({ recipe }: RecipeDetailViewProps) {
   };
 
   return (
-    <article className="mx-auto max-w-5xl px-4 py-6 sm:px-6 lg:px-8">
+    <article className="mx-auto max-w-6xl xl:max-w-7xl px-4 py-6 sm:px-6 lg:px-8 font-sans">
       {/* Back button & top actions */}
       <div className="mb-6 flex items-center justify-between">
         <Link
@@ -247,60 +247,60 @@ export default function RecipeDetailView({ recipe }: RecipeDetailViewProps) {
       </div>
 
       {/* Summary Info Bar */}
-      <div className="mt-8 grid grid-cols-2 gap-4 rounded-3xl border border-secondary/60 bg-white p-5 shadow-editorial sm:grid-cols-5">
+      <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3.5 sm:gap-4 rounded-3xl border border-[#D5DED3] bg-[#FAFAF6] p-4 sm:p-5 shadow-xs">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cream-100 text-primary">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E9EEE5] text-[#243B30]">
             <Clock className="h-5 w-5" />
           </div>
           <div>
-            <span className="block text-[11px] font-semibold text-muted uppercase">Prep Time</span>
-            <span className="font-serif text-base font-bold text-primary">
+            <span className="block text-[11px] font-semibold text-[#69766C] uppercase">Prep Time</span>
+            <span className="font-heading text-base font-bold text-[#243B30]">
               {recipe.prep_time_minutes > 0 ? `${recipe.prep_time_minutes}m` : "15m"}
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cream-100 text-primary">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E9EEE5] text-[#243B30]">
             <Flame className="h-5 w-5" />
           </div>
           <div>
-            <span className="block text-[11px] font-semibold text-muted uppercase">Cook Time</span>
-            <span className="font-serif text-base font-bold text-primary">
+            <span className="block text-[11px] font-semibold text-[#69766C] uppercase">Cook Time</span>
+            <span className="font-heading text-base font-bold text-[#243B30]">
               {recipe.cook_time_minutes > 0 ? `${recipe.cook_time_minutes}m` : "20m"}
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
-            <Clock className="h-5 w-5 text-accent" />
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#D96F50]/15 text-[#D96F50]">
+            <Clock className="h-5 w-5 text-[#D96F50]" />
           </div>
           <div>
-            <span className="block text-[11px] font-semibold text-muted uppercase">Total Time</span>
-            <span className="font-serif text-base font-bold text-accent">
+            <span className="block text-[11px] font-semibold text-[#69766C] uppercase">Total Time</span>
+            <span className="font-heading text-base font-bold text-[#D96F50]">
               {recipe.total_time_minutes > 0 ? `${recipe.total_time_minutes}m` : "35m"}
             </span>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cream-100 text-primary">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E9EEE5] text-[#243B30]">
             <ChefHat className="h-5 w-5" />
           </div>
           <div>
-            <span className="block text-[11px] font-semibold text-muted uppercase">Difficulty</span>
-            <span className="font-serif text-base font-bold text-primary">{recipe.difficulty}</span>
+            <span className="block text-[11px] font-semibold text-[#69766C] uppercase">Difficulty</span>
+            <span className="font-heading text-base font-bold text-[#243B30]">{recipe.difficulty}</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-cream-100 text-primary">
+        <div className="flex items-center gap-3 col-span-2 sm:col-span-1">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#E9EEE5] text-[#243B30]">
             <Users className="h-5 w-5" />
           </div>
           <div>
-            <span className="block text-[11px] font-semibold text-muted uppercase">Servings</span>
-            <span className="font-serif text-base font-bold text-primary">{servings}</span>
+            <span className="block text-[11px] font-semibold text-[#69766C] uppercase">Servings</span>
+            <span className="font-heading text-base font-bold text-[#243B30]">{servings}</span>
           </div>
         </div>
       </div>

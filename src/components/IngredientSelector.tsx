@@ -261,11 +261,11 @@ export default function IngredientSelector() {
                   key={ing}
                   className="group inline-flex items-center gap-2 min-h-[40px] rounded-xl bg-[#FAFAF6] border border-[#D5DED3] px-3.5 py-1.5 text-sm font-semibold text-[#243B30] shadow-xs transition-all hover:border-[#D96F50]"
                 >
-                  <span className="capitalize">{ing}</span>
+                  <span className="capitalize max-w-[180px] sm:max-w-none truncate">{ing}</span>
                   <button
                     onClick={() => removeIngredient(ing)}
                     aria-label={`Remove ${ing}`}
-                    className="flex h-5 w-5 items-center justify-center rounded-full text-[#69766C] transition-colors hover:bg-[#D96F50] hover:text-white"
+                    className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-[#69766C] transition-colors hover:bg-[#D96F50] hover:text-white"
                   >
                     <X className="h-3.5 w-3.5" />
                   </button>
