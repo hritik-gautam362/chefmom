@@ -1,0 +1,35 @@
+{
+  "input_file": "data\\raw\\recipe.csv",
+  "input_rows_processed": 32722,
+  "kept_recipe_rows": 20569,
+  "excluded_recipe_rows": 11279,
+  "manual_review_recipe_rows": 874,
+  "meat_tag_counts": {
+    "vegetarian_or_no_identified_meat": 15233,
+    "pork": 2099,
+    "chicken": 3488,
+    "mutton": 192,
+    "pigeon": 4
+  },
+  "exclusion_reason_counts": {
+    "contains_alcohol": 4097,
+    "beef_or_beef_ingredient": 2549,
+    "disallowed_other_poultry": 478,
+    "disallowed_seafood": 4090,
+    "explicit_sexual_content": 16,
+    "disallowed_other_red_meat": 49,
+    "disallowed_other_meat": 19
+  },
+  "unique_image_urls_total": 24759,
+  "unique_image_urls_scanned": 0,
+  "unique_image_status_counts": {
+    "not_scanned_image_stripped": 24759
+  },
+  "source_recipe_rows_missing_image": 7309,
+  "image_model": null,
+  "important": "Only safe_model_pass images (normal >= 0.95) remain in the output image column. Other image URLs are blanked for safe UI placeholders. Valid recipes are kept even when their image is blocked.",
+  "safe_image_threshold": {
+    "normal_minimum": 0.95,
+    "nsfw_block_minimum": 0.5
+  }
+}
