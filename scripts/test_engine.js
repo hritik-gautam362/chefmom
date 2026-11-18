@@ -207,6 +207,9 @@ assert(vegetarianDishes >= 5000, `TC15c — Vegetarian collection has ${vegetari
 const indianCollection = db.prepare("SELECT count(*) as count FROM recipes WHERE cuisine = 'Indian'").get().count;
 assert(indianCollection >= 200, `TC15d — Indian Favourites collection has ${indianCollection.toLocaleString()} recipes`);
 
+const assameseCollection = db.prepare("SELECT count(*) as count FROM recipes WHERE cuisine = 'Assamese'").get().count;
+assert(assameseCollection === 51, `TC15e — Assamese cuisine collection has ${assameseCollection} authentic recipes`);
+
 // 10. TC19 — PWA Assets Verification
 const manifestPath = path.join(__dirname, '..', 'public', 'manifest.json');
 const swPath = path.join(__dirname, '..', 'public', 'sw.js');

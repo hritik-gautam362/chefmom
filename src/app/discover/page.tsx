@@ -28,7 +28,7 @@ const COLLECTIONS = [
   { id: "budget", label: "Budget-Friendly Meals", emoji: "🍚" },
 ];
 
-const CUISINES = ["All", "Indian", "Italian", "Mexican", "Asian", "Mediterranean", "French", "American"];
+const CUISINES = ["All", "Assamese", "Indian", "Italian", "Mexican", "Asian", "Mediterranean", "French", "American"];
 const MEAL_TYPES = ["All", "Breakfast", "Lunch", "Dinner", "Snack", "Dessert"];
 
 export default function DiscoverPage() {

@@ -28,7 +28,7 @@ const CATEGORIES = [
   "Kitchen staples",
 ];
 
-const CUISINES = ["Any", "Indian", "Italian", "Mexican", "Asian", "Mediterranean", "American", "French"];
+const CUISINES = ["Any", "Assamese", "Indian", "Italian", "Mexican", "Asian", "Mediterranean", "American", "French"];
 const MEAL_TYPES = ["Any", "Breakfast", "Lunch", "Dinner", "Snack", "Dessert"];
 const ALLERGIES_LIST = ["Peanuts", "Dairy", "Gluten", "Shellfish", "Soy", "Eggs", "Tree nuts"];
 
